@@ -39,57 +39,74 @@ class HASHTABLE:
             else:
                 bucket.append(key, value)
         
-        # get a particular value for the key
-        def get_value(self, key):
+    # get a particular value for the key
+    def get_value(self, key):
 
-            # use the hash function to get the index
-            hashed_key = hash(key) % self.size
+        # use the hash function to get the index
+        hashed_key = hash(key) % self.size
 
-            # Get the bucket corresponding to index
-            bucket = self.hashtable(hashed_key)
+        # Get the bucket corresponding to index
+        bucket = self.hashtable[hashed_key]
 
-            # find the key
-            found_key = False # initializing the found flag
-            for idx, record in enumerate(bucket): 
-                record_key, record_value = record
+        # find the key
+        found_key = False # initializing the found flag
+        for idx, record in enumerate(bucket): 
+            record_key, record_value = record
 
-                # here we check if the recorded key is same as the 'key' argument
-                if record_key == key:
-                    found_key = True
-                    break
+            # here we check if the recorded key is same as the 'key' argument
+            if record_key == key:
+                found_key = True
+                break
 
-                if found_key:
-                    return record_value
+            if found_key:
+                return record_value
 
-                else:
-                    return "No such key and value"
+            else:
+                return "No such key and value"
 
-        def delete_value(self, key):
-            # use the hash function to get the index
-            hashed_key = hash(key) % self.size
+    def delete_value(self, key):
+        # use the hash function to get the index
+        hashed_key = hash(key) % self.size
 
-            # Get the bucket corresponding to index
-            bucket = self.hashtable(hashed_key)
+        # Get the bucket corresponding to index
+        bucket = self.hashtable[hashed_key]
 
-            # find the key
-            found_key = False # initializing the found flag
-            for idx, record in enumerate(bucket): 
-                record_key, record_value = record
+        # find the key
+        found_key = False # initializing the found flag
+        for idx, record in enumerate(bucket): 
+            record_key, record_value = record
 
-                # here we check if the recorded key is same as the 'key' argument
-                if record_key == key:
-                    found_key = True
-                    break
+            # here we check if the recorded key is same as the 'key' argument
+            if record_key == key:
+                found_key = True
+                break
 
-                if found_key:
-                    bucket.pop(index)
-                return
+            if found_key:
+                bucket.pop(index)
+            return
 
-        # to print the elements of the hash map
-        def __str__(self):
-            print(" ".join(str(item)) for item in self.hashtable)
+    # to print the elements of the hash map
+    def __str__(self):
+        return " ".join(str(item) for item in self.hashtable)
 
             
+hashtable = HASHTABLE(50)
 
+# add some value
+hashtable.set_value('Fruits', 'apples')
+print(hashtable)
+print()
+
+hashtable.set_value('Vegetables', 'Carrots')
+print(hashtable)
+print()
+
+# access a record with key
+print(hashtable.get_value('Vegetables'))
+print()
+
+# delete a record
+hashtable.delete_value('Vegetables')
+print(hashtable)
 
     
